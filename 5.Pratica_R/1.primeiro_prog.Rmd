@@ -1,0 +1,45 @@
+```{r}
+getwd()
+
+setwd("C:/Users/anacl/OneDrive/Área de Trabalho/cursos/data science")
+
+
+```
+
+saber o tipo de objeto do "iris" ---> saida: DataFrame
+```{r}
+class(iris)
+```
+
+salvar um objeto
+```{r}
+#clona
+iristeste = iris
+
+#salva
+save(iristeste, file="iristeste.Rdata")
+
+#remove do R
+rm(iristeste)
+
+#testa a remoçao
+iristeste
+```
+carrega o arquivo
+mesmo tendo apagado ele anteriormente
+```{r}
+#carrega o obj direto do disco
+load(file="iristeste.Rdata")
+
+#testa
+iristeste
+```
+vetor e grafico basico de dispersão
+```{r}
+# vetor: so pode com um unico tipo de dados
+# se quisesse inteiros: x=c(12L, 34L, 56L, 79L)
+x = c(12,34,56,79)
+y = c(1,6,9,14)
+plot(x,y)
+```
+

@@ -1,0 +1,102 @@
+VETORES
+```{r}
+x = c(1.9,2,3,4,5.3,6)
+x
+x[1]
+x[1] = 10
+x[1]
+```
+```{r}
+y = c("a", "b", "c", "d")
+y
+
+z = c(1L, 2L, 3L)
+z
+```
+
+
+
+
+
+MATRIZES
+```{r}
+#matriz que ja compoe no R, "death rates in virginia" -> taxas de mortalidade
+VADeaths
+
+#imprimir o nome das colunas e das linhas
+colnames(VADeaths)
+rownames(VADeaths)
+```
+```{r}
+#so coluna 1
+"so coluna 1"
+VADeaths[,1]
+
+"so linha 1"
+VADeaths[1,]
+
+"linha 1 ate 3"
+VADeaths[1:3,]
+
+"linha 1, 3, 5"
+VADeaths[c(1,3,5),]
+```
+
+
+
+
+DATA FRAME
+```{r}
+#funciona como matriz, mas suporta diferentes tipos por linhas
+longley
+
+longley[1:4, 1:3]
+
+#acessa coluna por $ -> resultado sai em vetor
+longley$Unemployed
+
+#acessa coluna pelo nome -> resultado sai em coluna
+longley['Unemployed']
+
+```
+
+
+
+
+LISTAS
+```{r}
+#listas permitem diferentes estruturas de dados, cada posiçao pode ter um tipo de dado diferente
+#listas sao interessantes quando: quer agrupar varios conjuntos de dados que tenham uma relaçao, um mesmo estudo
+#essa lista chama ability.cov, o .cov faz parte do nome, nao é extensao
+#tem 3 posiçoes
+# 1->cov MATRIZ,   2->center VETOR,     3->n.obs NUMERIC
+ability.cov
+
+```
+```{r}
+#acessar partes da lista
+#so a lista 1->cov, que é uma matriz, 2 jeitos de escrever
+ability.cov$cov
+ability.cov[1]
+
+#verificando que ha difernetes tipos de objetos na lista
+class(ability.cov$cov)
+class(ability.cov$center)
+
+#acessando o elemento dentro da lista
+ability.cov$cov[1:3, 1:3]
+```
+
+
+
+
+
+FATORES
+```{r}
+#variaveis categoricas
+
+#Data sets related to the 50 states of the United States of America.
+state.region
+```
+
+

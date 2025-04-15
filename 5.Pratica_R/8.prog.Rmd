@@ -1,0 +1,45 @@
+IF
+
+```{r}
+a = 10
+b = 20
+
+if(a < b){
+  print("V")
+} else{
+  print("F")
+}
+```
+
+IFELSE
+```{r}
+# ifelse(condição, sim, nao)
+
+x = ifelse(a>10, "A é maior que 10", "A não é maior" )
+```
+
+FOR
+```{r}
+for(i in 1:10){
+  print(i)
+}
+```
+
+WHILE
+```{r}
+a = 1
+while(a<6){
+  print(a)
+  a = a+1
+}
+```
+FUNÇÃO
+```{r}
+parouimpar = function(x){
+  return(ifelse(x%%2==0, "par", "impar"))
+}
+
+parouimpar(200)
+parouimpar(3)
+```
+
