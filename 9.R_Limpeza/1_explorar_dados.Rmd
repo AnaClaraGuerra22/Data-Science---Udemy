@@ -1,0 +1,108 @@
+ 
+ churn : planilha com dados dos clientes, para prever a probabilidade dele de "sair" da empresa, e se tem um padrao pros clientes etc
+ importa dados, string vazio como NA, string como fatores
+```{r}
+
+dados <- read.csv("C:/Users/anacl/OneDrive/Área de Trabalho/cursos/data science/FormacaoCD/todos os arquivos/9.Prática em R/dados/Churn.csv", sep = ";", na.strings = "", stringsAsFactors = TRUE)
+
+```
+
+
+ouuu pode fazer:
+```{r}
+dados <- read.csv(file.choose(), sep = ";", na.strings = "", stringsAsFactors = TRUE)
+head(dados)
+
+#resumo dos dados
+#int ---> media, mediana, os quartis, max, min
+# NA's --> aparece quantidade de colunas com NaN
+summary(dados)
+```
+dar nomes corretos as colunas
+atraves de um vetor no R (com a letra c() )
+```{r}
+colnames(dados) = c("Id", "Score", "Estado", "Genero", "Idade", "Patrimonio", "Saldo", "Produtos", "TemCartCred", "Ativo", "Salario", "Saiu")
+head(dados)
+```
+
+barplot ---> grafico de barras
+explorar dados, colunas categoricas
+analise exploratoria
+conhecer o conj de dados dentro de suas caracteristicas
+importante por que ja vai identificar possiveis problemas nos dados e eventuais possiveis soluçoes para cada um
+dados categoricos ---> estado e genero
+```{r}
+##        estados
+counts = table(dados$Estado)
+barplot(counts, main="Estados", xlab = "Estados", ylab = "Quantidade")
+
+#identificamos na tabela: provavel erro nos estados RP SP TD, provavel que nao pertencem ao dominio, ou tem valores incorretos. Tem que tratar esses dados incorretos
+
+
+
+##   genero
+counts = table(dados$Genero)
+barplot(counts, main="Genero", xlab="Genero", ylab = "Quantidade")
+
+#identificamos erro: informaçoes diferentes que significam a mesma coisa, F, Fem ---> Feminino. e M ---> Masculino
+
+
+```
+
+Explorar, colunas numericas
+```{r}
+#score
+summary(dados$Score)
+
+boxplot(dados$Score)
+#nada de anormal visualizado no boxplot
+#min, primeiro quartil, segundo quartil (mediana), terceiro quartil, max
+
+hist(dados$Score)
+#distribuiçao mais ou menos na media, uniforme, sem anomalia
+```
+
+idade
+```{r}
+cat("Resumo da Idade:\n")
+summary(dados$Idade)
+
+# Observado ANOMALIA: idade minima = -20, dominio de idade negativo (errado)
+#                     idade maxima = 140
+# observado os outros quartis, media e mediana, percebe-se que os dados em geral estao normais e bem distribuidos
+
+boxplot(dados$Idade, main="Distribuição da Idade")
+
+
+hist(dados$Idade)
+#distribuiçao mais ou menos na media, uniforme, sem anomalia
+```
+
+saldo
+```{r}
+summary(dados$Saldo)
+#min = 0    e   primeiro quartil = 0:    quer dizer que ha muitos zeros
+#media proxima da mediana: mostra que os dados tem uma certa regularidade 
+
+boxplot(dados$Saldo)
+
+
+hist(dados$Saldo)
+#tirando os dados zero: os outros dados estao bem distribuidos e proximos da media
+
+```
+
+
+
+
+
+salario
+```{r}
+summary(dados$Salario)
+# 7 valores NaN ---> ter que tratar
+
+boxplot(dados$Salario)
+boxplot(dados$Salario, outline = FALSE)
+hist(dados$Salario, main="Salario")
+```
+

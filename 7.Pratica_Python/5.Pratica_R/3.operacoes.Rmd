@@ -1,0 +1,41 @@
+```{r}
+delta = 8
+class(delta)
+```
+
+```{r}
+delta = 8L
+class(delta)
+```
+```{r}
+logico = TRUE
+logico = F
+class(logico)
+
+caractere = "Texto"
+caractere = 'Texto'
+class(caractere)
+```
+Operações Matematicas
+```{r}
+c = 2
+d = 4
+
+#vai imprimir, pois nao é atribuido a nenhuma variavel
+(c+d)*d
+
+e = (c+d)*d
+e
+
+# raiz quadrada
+sqrt(2500)
+```
+Testes Lógicos
+```{r}
+a = 1
+b = 2
+
+a < b
+a == b
+```
+

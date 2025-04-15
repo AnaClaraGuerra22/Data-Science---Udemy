@@ -1,0 +1,99 @@
+
+```{r}
+dados <- read.csv("C:/Users/anacl/OneDrive/Área de Trabalho/cursos/data science/FormacaoCD/todos os arquivos/9.Prática em R/dados/Churn.csv", sep = ";", na.strings = "", stringsAsFactors = TRUE)
+
+colnames(dados) = c("Id", "Score", "Estado", "Genero", "Idade", "Patrimonio", "Saldo", "Produtos", "TemCartCred", "Ativo", "Salario", "Saiu")
+
+head(dados)
+```
+
+
+
+
+
+DADOS DUPLICADOS
+```{r}
+#atribuir ao x os dados duplicados ---> tem mesmo ID
+
+x = dados[duplicated(dados$Id), ]
+x
+
+#verificamos que o ID = 81 ESTA DUPLICADO
+#vamos excluir pelo indice 82 (vetor)
+
+dados = dados [ -c(82), ]
+
+#buscar a linha que estava duplicada
+dados[dados$Id == x$Id , ]
+#resultado: indice 81 e 82 possuem o mesmo ID
+```
+
+```{r}
+#verificar que nao ha mais duplicados
+x =  dados[duplicated(dados$Id),]
+x
+```
+
+
+OUTRO PROBLEMA
+ESTADO FORA DO DOMINIO
+DOMINIO = RS, SC, PR
+```{r}
+#fora do dominio -- dado categorico 
+unique(dados$Estado)
+
+summary(dados$Estado)
+
+#SOLUÇAO: PREENCHER COM A MODA --> RS
+
+
+moda <- function(x) {
+  ux <- unique(na.omit(x))  # remove NAs e pega valores únicos
+  tab <- tabulate(match(x, ux))  # conta as ocorrencias
+  ux[tab == max(tab)]  #retorna o valor mais frequente
+}
+
+# Encontrando a moda da coluna "Estado"
+moda_estado <- moda(dados$Estado)
+print(moda_estado)
+
+dados[!dados$Estado %in% c("RS","SC","PR"), ]$Estado = moda_estado
+summary(dados$Estado)
+
+```
+
+```{r}
+#remover levels nao usados
+dados$Estado = factor(dados$Estado)
+summary(dados$Estado)
+```
+
+
+
+
+
+OUTRO PROBLEMA
+OUTLIERS --> VALORES FORA DO PADRAO
+
+Salario: se for o dobro do desvio padrao --> esta errado
+```{r}
+#outliers, criando um parametro com desvio padrao
+desv = sd(dados$Salario, na.rm = TRUE)
+dados[dados$Salario >= 2 *desv, ]$Salario
+
+#outro jeito mas sem usar NAs
+boxplot(dados$Salario)
+x = boxplot(dados$Salario)$out
+x
+
+#SOLUÇAO ---> atualizamos todas para mediana
+medianaa <- median(dados$Salario)
+dados[dados$Salario >= 2*desv , ]$Salario = medianaa
+```
+
+
+```{r}
+#checar se sairam os outliers
+dados[dados$Salario >= 2*desv]
+```
+

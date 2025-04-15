@@ -1,0 +1,50 @@
+
+HEAD E TAIL
+```{r}
+#HEAD: retorna os primeiros conjuntos de registros de dados (padrao: primeiras 6 linhas)
+#TAIL: retorna os ultimos conjuntos de registro de dados    (padrao: ultimas 6 linhas)
+
+#data frame 
+esoph
+
+#default 6 linhas
+head(esoph)
+tail(esoph)
+
+# 2 linhas
+head(esoph, 2)
+tail(esoph, 2)
+```
+
+
+```{r}
+#dimensoes   --> linhas  colunas
+dim(esoph)
+
+#comprimento
+#se usar com obj bidimensional, vai retornar colunas (qtd posiçoes)
+length(islands)
+```
+
+```{r}
+#nome das colunas
+colnames(esoph)
+
+#nome de linhas ---> nesse caso, nao tem nome, entao retorna o indice
+rownames(esoph)
+```
+
+```{r}
+#resumo
+#colunas categoricas: retorna a quantidade de informaçoes, quantas instancias existem
+#colunas numericas: retorna os quartis, menor valor(min), maior valor(max), mediana(= segundo quartil), media
+summary(esoph)
+```
+
+```{r}
+#escolher arquivo
+#abre a caixa de dialogo e retorna o caminho desse arquivo no "enviroment"
+x = file.choose()
+x
+```
+

@@ -1,0 +1,106 @@
+Tratamento e limpeza I
+
+
+
+```{r}
+dados <- read.csv("C:/Users/anacl/OneDrive/Área de Trabalho/cursos/data science/FormacaoCD/todos os arquivos/9.Prática em R/dados/Churn.csv", sep = ";", na.strings = "", stringsAsFactors = TRUE)
+
+colnames(dados) = c("Id", "Score", "Estado", "Genero", "Idade", "Patrimonio", "Saldo", "Produtos", "TemCartCred", "Ativo", "Salario", "Saiu")
+
+head(dados)
+```
+
+
+problema 1: DADOS FALTANTES NaN
+```{r}
+
+#retorna as linhas que tem dados faltantes
+
+
+dados[!complete.cases(dados),]
+#dados[linhas, colunas]
+#linhas --> tem dados faltantes, colunas --> todas
+
+# saida: tem NAs em : Genero e Salario
+```
+Tratamento dos dados faltantes:
+
+
+salarios
+```{r}
+#tratar salarios
+summary(dados$Salario)
+#tem 7 NAs
+
+#ver mediana
+#na.rm = TRUE ---> pois tem dados faltantes, se fosse FALSE, a mediana seria igual a NA
+medianaaa <- median(dados$Salario, na.rm = TRUE)
+
+
+#tratar NAs de dados numericos ---> atribui a mediana a eles
+#atribuir mediana a NAs
+#teste logico: is.na --> funçao que retorna T ou F se a linha tem NA
+dados[is.na(dados$Salario),]$Salario = medianaaa
+
+```
+
+```{r}
+#percebe-se que nao existe mais NAs
+dados[!complete.cases(dados$Salario),]$Salario
+summary(dados$Salario)
+```
+
+
+falta de padronização em Genero
+dados categoricos
+```{r}
+#ver valores
+unique(dados$Genero)
+summary(dados$Genero)
+#8 NAs
+# tem mais masculino do que feminino: Masculino é moda, entao os NAs ---> Masculino
+
+```
+```{r}
+#transformar F e Fem em Feminino
+#transformar M e NAs em Masculino
+
+dados[is.na(dados$Genero) | dados$Genero == "M" , ]$Genero = "Masculino"
+dados[dados$Genero == "Fem" | dados$Genero == "F" , ]$Genero = "Feminino"
+
+summary(dados$Genero)
+
+```
+
+```{r}
+#remover levels nao usados
+dados$Genero = factor(dados$Genero)
+
+summary(dados$Genero)
+```
+
+
+
+OUTRO PROBLEMA
+IDADE FORA DO DOMINIO
+```{r}
+summary(dados$Idade)
+#nao tem NAs    --->   dados[is.na(dados$Idade),]
+#idades fora do dominio:
+#min = -20
+#max = 140
+
+#dados[dados$Idade<0 | dados$Idade > 110 ,]$Idade
+
+#SOLUÇÃO: PREENCHER COM MEDIANA
+medianaa <- median(dados$Idade)
+
+#substituição
+dados[dados$Idade<0 | dados$Idade > 110 ,]$Idade = medianaa
+
+```
+```{r}
+#ver que os dados anormais foram substituidos
+summary(dados$Idade)
+```
+

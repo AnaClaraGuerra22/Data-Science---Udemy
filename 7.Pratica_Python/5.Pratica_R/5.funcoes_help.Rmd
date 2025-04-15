@@ -1,0 +1,28 @@
+```{r}
+getwd()
+setwd("C:/Users/anacl/OneDrive/Área de Trabalho/cursos/data science")
+
+#sd calcula o desvio padrao
+
+#chamou sem (), vai sair informaçoes sobre a funçao:
+#function (x, na.rm = FALSE)                       ----> x é um vetor  
+# sqrt(var(if (is.vector(x) || is.factor(x)) x else as.double(x), na.rm = na.rm))
+sd
+```
+
+
+```{r}
+
+#head retorna as primeiras linhas de um data Frame
+# x = conjunto de dados, n= numero de linhas
+
+head(x=iris, n=2)
+
+# usa o valor padrao para n (n=6)
+head(iris)
+head(iris,2)
+
+# erro!! x é obrigatorio e nao tem valor padrao
+head(n=22)
+```
+
